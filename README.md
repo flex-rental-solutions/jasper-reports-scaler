@@ -5,3 +5,5 @@ Since there is no page size scaler in the JasperReports library, this in an open
 There is one main class, JasperReportsScalerUtils that handles the scaling. Currently the scaling is very basic, it only scales the width and X values on report elements. Everything will squeeze in or out proportionally. It has only been tested and used with fairly simple report elements. Not sure how elements such as tables & crosstabs will work at this point.
 
 Hopefully together, we can make this a robust scaler that maybe one day can be included in the JasperReports library itself.
+
+Feel free to fork and improve. If you add some great additions or improvements send us a pull request and we will include it.
