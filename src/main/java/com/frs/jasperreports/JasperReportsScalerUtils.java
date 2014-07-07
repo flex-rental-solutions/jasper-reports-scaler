@@ -84,8 +84,8 @@ public class JasperReportsScalerUtils {
         Double columnWidth = Double.valueOf(jasperDesign.getColumnWidth()) * ratio;
         Double columnSpacing = Double.valueOf(jasperDesign.getColumnSpacing()) * ratio;
 
-        jasperDesign.setColumnWidth(new BigDecimal(columnWidth).setScale(0, RoundingMode.HALF_EVEN).intValue());
-        jasperDesign.setColumnSpacing(new BigDecimal(columnSpacing).setScale(0, RoundingMode.HALF_EVEN).intValue());			
+        jasperDesign.setColumnWidth(new BigDecimal(columnWidth).setScale(0, RoundingMode.DOWN).intValue());
+        jasperDesign.setColumnSpacing(new BigDecimal(columnSpacing).setScale(0, RoundingMode.DOWN).intValue());			
 
         for(JRBand band : jasperDesign.getAllBands()){
             for(JRElement element : band.getElements()){		
