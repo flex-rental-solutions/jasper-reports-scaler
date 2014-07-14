@@ -23,6 +23,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import net.sf.jasperreports.components.list.DesignListContents;
 import net.sf.jasperreports.components.list.ListComponent;
+import net.sf.jasperreports.crosstabs.JRCrosstab;
 import net.sf.jasperreports.engine.JRBand;
 import net.sf.jasperreports.engine.JRComponentElement;
 import net.sf.jasperreports.engine.JRElement;
@@ -119,10 +120,16 @@ public class JasperReportsScalerUtils {
         //200 - (180 + 10) = 10
         Integer moveX = ((totalX - (totalXScaled + diff)) * -1);
 
-        element.setWidth(newWidth);		
-        element.setX(element.getX() + moveX);
+        if(element instanceof JRCrosstab && ratio < 1.0){
+            //do NOT scale crosstabs down, can create "Not enough space to render the crosstab." error 
+        }else{
+            element.setWidth(newWidth);		
+            element.setX(element.getX() + moveX);
+        }
 
         JRElement [] childElements = null;
+        
+        double elementRatio = newWidth / origElementWidth.doubleValue();
 
         if(element instanceof JRElementGroup){
             childElements = ((JRElementGroup)element).getElements();
@@ -137,12 +144,11 @@ public class JasperReportsScalerUtils {
 
                 childElements = ((ListComponent)comp).getContents().getElements();
             }
-        }	
+        }
 
-        if(childElements != null){
-            double elementRatio = newWidth / origElementWidth.doubleValue();
+        if(childElements != null){            
             for(JRElement childElement : childElements){
-                    scaleElement(childElement, elementRatio);
+                scaleElement(childElement, elementRatio);
             }
         }
     }
