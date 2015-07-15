@@ -37,10 +37,15 @@ import net.sf.jasperreports.engine.type.OrientationEnum;
  * @author Roger Diller <roger@flexrentalsolutions.com>
  */
 public class JasperReportsScalerUtils {
- 
+
     public static JasperDesign scaleJasperDesign(JasperDesign jasperDesign, PaperSizeEnum paperSize, PageOrientationEnum orientation){
+
+        return scaleJasperDesign(jasperDesign, paperSize.getWidth(), paperSize.getHeight(), orientation);
+    }
+ 
+    public static JasperDesign scaleJasperDesign(JasperDesign jasperDesign, Integer width, Integer height, PageOrientationEnum orientation){
 		
-        if(paperSize == null){
+        if(width == null || height == null){
             //do nothing so that report generates based on JRXML file
             return jasperDesign;
         }
@@ -67,13 +72,13 @@ public class JasperReportsScalerUtils {
         switch(orientation){
             case PORTRAIT:
                 jasperDesign.setOrientation(OrientationEnum.PORTRAIT);
-                jasperDesign.setPageWidth(paperSize.getWidth());
-                jasperDesign.setPageHeight(paperSize.getHeight());
+                jasperDesign.setPageWidth(width);
+                jasperDesign.setPageHeight(height);
                 break;
             case LANDSCAPE:
                 jasperDesign.setOrientation(OrientationEnum.LANDSCAPE);
-                jasperDesign.setPageWidth(paperSize.getHeight());
-                jasperDesign.setPageHeight(paperSize.getWidth());
+                jasperDesign.setPageWidth(height);
+                jasperDesign.setPageHeight(width);
                 break;
         }
 
