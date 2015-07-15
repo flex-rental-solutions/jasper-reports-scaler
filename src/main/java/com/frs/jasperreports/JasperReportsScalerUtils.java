@@ -40,7 +40,8 @@ public class JasperReportsScalerUtils {
 
     public static JasperDesign scaleJasperDesign(JasperDesign jasperDesign, PaperSizeEnum paperSize, PageOrientationEnum orientation){
 
-        return scaleJasperDesign(jasperDesign, paperSize.getWidth(), paperSize.getHeight(), orientation);
+        return scaleJasperDesign(jasperDesign, 
+			paperSize == null ? null : paperSize.getWidth(), paperSize == null ? null : paperSize.getHeight(), orientation);
     }
  
     public static JasperDesign scaleJasperDesign(JasperDesign jasperDesign, Integer width, Integer height, PageOrientationEnum orientation){
